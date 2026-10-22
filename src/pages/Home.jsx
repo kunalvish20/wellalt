@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import VideoReviews from '../components/VideoReviews'
@@ -7,6 +8,31 @@ import { products } from '../data/store'
 import HeroSlider from '../components/HeroSlider'
 
 export default function Home(){
+  const productTrackRef = useRef(null)
+  const [activeProduct, setActiveProduct] = useState(0)
+
+  const scrollToProduct = index => {
+    const track = productTrackRef.current
+    const cards = track?.children
+    if (!cards?.length) return
+    const next = Math.max(0, Math.min(index, cards.length - 1))
+    track.scrollTo({
+      left: cards[next].offsetLeft - cards[0].offsetLeft,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+    })
+    setActiveProduct(next)
+  }
+
+  const updateActiveProduct = event => {
+    const track = event.currentTarget
+    const cards = [...track.children]
+    if (!cards.length) return
+    const firstLeft = cards[0].offsetLeft
+    const nearest = cards.reduce((best, card, index) =>
+      Math.abs(card.offsetLeft - firstLeft - track.scrollLeft) < Math.abs(cards[best].offsetLeft - firstLeft - track.scrollLeft) ? index : best, 0)
+    setActiveProduct(nearest)
+  }
+
   return <>
     <SEO title="Everyday Wellness, Made Kid-Friendly" description="XYZ makes playful, parent-friendly everyday wellness products for kids ages 2+. Shop gut, throat comfort, immunity and travel routines." />
 
@@ -23,7 +49,17 @@ export default function Home(){
           <Link to="/shop" className="text-link strong">Shop all products <Icon name="arrow" size={18}/></Link>
         </div>
 
-        <div className="product-grid">{products.map(p => <ProductCard key={p.id} product={p}/>)}</div>
+        <div className="product-grid" ref={productTrackRef} onScroll={updateActiveProduct} aria-label="Featured products">
+          {products.map(p => <ProductCard key={p.id} product={p}/>)}
+        </div>
+        <div className="product-carousel-controls">
+          <span className="product-carousel-hint">Swipe to explore</span>
+          <div className="product-carousel-actions">
+            <span className="product-carousel-count" aria-live="polite">{activeProduct + 1} / {products.length}</span>
+            <button type="button" onClick={() => scrollToProduct(activeProduct - 1)} disabled={activeProduct === 0} aria-label="Previous product"><Icon name="arrow" size={18}/></button>
+            <button type="button" onClick={() => scrollToProduct(activeProduct + 1)} disabled={activeProduct === products.length - 1} aria-label="Next product"><Icon name="arrow" size={18}/></button>
+          </div>
+        </div>
         <div className="center-cta"><Link className="text-link strong" to="/shop">VIEW ALL PRODUCTS <Icon name="arrow" size={18}/></Link></div>
       </div>
     </section>
