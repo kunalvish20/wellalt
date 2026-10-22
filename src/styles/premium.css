@@ -1319,31 +1319,32 @@ button, input, select, textarea { font-family: inherit; }
   .hero-stage .hero-slider-controls button { width: 40px; height: 40px; border-radius: 50%; }
 
   .proof-strip.section {
-    padding: 62px 0 68px;
+    padding: 38px 0 42px;
     background: radial-gradient(circle at 50% 45%, #f4ffc4 0, #f8fbd3 52%, #fffef2 100%);
   }
-  .proof-inner { gap: 30px; }
+  .proof-inner { gap: 20px; }
   .proof-title { width: 100%; max-width: 440px; margin-inline: auto; }
-  .proof-title .micro { font-size: 10px; letter-spacing: .15em; }
+  .proof-title .micro { font-size: 9px; letter-spacing: .14em; }
   .proof-title h2 {
-    margin: 12px 0 14px;
-    font-size: clamp(25px, 6.8vw, 34px);
-    line-height: 1.08;
+    margin: 8px 0 10px;
+    font-size: clamp(22px, 6.2vw, 30px);
+    line-height: 1.04;
     white-space: normal;
     text-wrap: balance;
   }
-  .proof-title p { max-width: 34ch; font-size: 14px; line-height: 1.55; }
-  .proof-circles { width: 100%; max-width: 440px; margin-inline: auto; gap: 12px; }
+  .proof-title p { max-width: 34ch; font-size: 13px; line-height: 1.45; }
+  .proof-circles { width: 100%; max-width: 264px; margin-inline: auto; gap: 10px; }
   .proof-circles div {
-    width: 100%;
-    max-width: none;
+    width: min(100%, 112px);
+    max-width: 112px;
     min-width: 0;
-    padding: 12px;
+    justify-self: center;
+    padding: 8px;
     border: 1px solid rgba(104, 19, 183, .12);
     box-shadow: 0 8px 24px rgba(104, 19, 183, .06);
   }
-  .proof-circles strong { font-size: clamp(27px, 8vw, 36px); font-weight: 750; }
-  .proof-circles span { max-width: 12ch; margin-top: 8px; font-size: clamp(11px, 3vw, 13px); font-weight: 600; line-height: 1.25; }
+  .proof-circles strong { font-size: 25px; font-weight: 750; }
+  .proof-circles span { max-width: 12ch; margin-top: 5px; font-size: 11px; font-weight: 600; line-height: 1.2; }
 }
 
 /* The supplied product photo includes its own background and is framed at 4:5. */
