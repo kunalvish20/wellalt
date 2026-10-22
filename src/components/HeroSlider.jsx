@@ -132,8 +132,6 @@ export default function HeroSlider() {
                   aria-current={index === active ? 'true' : undefined}
                   onClick={() => setActive(index)}
                 >
-                  <span className="hero-page-number">0{index + 1}</span>
-                  <span className="hero-page-name">{slide.label}</span>
                   <span className="hero-page-track"><span key={index === active ? active : 'idle'} /></span>
                 </button>
               ))}
