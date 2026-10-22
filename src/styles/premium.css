@@ -1381,13 +1381,23 @@ button, input, select, textarea { font-family: inherit; }
   .bestsellers .product-grid::-webkit-scrollbar { display: none; }
   .bestsellers .product-card { min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; }
   .bestsellers .product-card-media {
-    height: min(56vw, 220px);
+    display: block;
+    height: clamp(235px, 74vw, 280px);
     aspect-ratio: auto;
     margin: 8px 8px 0;
     padding: 0;
   }
   .bestsellers .product-card-media::after { display: none; }
-  .bestsellers .product-card-media img { width: 100%; height: 100%; object-fit: contain; }
+  .bestsellers .product-card-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: contain;
+    object-position: center;
+  }
+  .bestsellers .product-card:hover .product-card-media img { transform: none; }
   .bestsellers .product-chip { top: 10px; right: 10px; padding: 6px 8px; font-size: 9px; }
   .bestsellers .product-card-body { padding: 13px 15px 15px; }
   .bestsellers .product-card-meta { margin-bottom: 7px; }
@@ -1406,5 +1416,15 @@ button, input, select, textarea { font-family: inherit; }
   .product-carousel-actions button { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid rgba(104, 19, 183, .25); border-radius: 50%; background: var(--cream); color: var(--purple-dark); }
   .product-carousel-actions button:first-of-type svg { rotate: 180deg; }
   .product-carousel-actions button:disabled { opacity: .35; cursor: default; }
+
+  .trust-story.section { padding-block: 28px 40px; }
+  .trust-story-grid { gap: 10px; }
+  .trust-story .story-card { min-height: 0; padding: 24px; }
+  .trust-story .dark-card h2 { margin: 10px 0 14px; font-size: clamp(36px, 10vw, 44px); }
+  .trust-story .dark-card p { margin: 0; font-size: 15px; line-height: 1.5; }
+  .trust-story .dark-card .btn { margin-top: 24px; }
+  .trust-story .checklist-card h3 { margin: 24px 0 18px; font-size: 28px; }
+  .trust-story .checklist-card ul { gap: 12px; }
+  .trust-story .checklist-card .fine-print { margin-top: 22px !important; font-size: 11px !important; }
 }
 
